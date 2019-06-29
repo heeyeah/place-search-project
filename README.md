@@ -7,17 +7,17 @@
 
 1. 로그인
     - 사용자의 아이디와 비번으로 로그인을 할 수 있어야 합니다. 단, 사용자 데이터는 애플리케이션 실행 시점에 생성합니다.
-　　 - 비밀번호는 암호화해서 저장해 주세요.
+    - 비밀번호는 암호화해서 저장해 주세요.
 
 2. 장소 검색
-　　 - 키워드를 통해 장소를 검색할 수 있어야 합니다.
-　　 - 검색 결과는 Pagination 형태로 제공해 주세요.
-　　 - 검색 소스는 카카오 API의 키워드로 장소 검색(https://developers.kakao.com/docs/restapi/local#키워드-검색)을 활용합니다.
+    - 키워드를 통해 장소를 검색할 수 있어야 합니다.
+    - 검색 결과는 Pagination 형태로 제공해 주세요.
+    - 검색 소스는 카카오 API의 키워드로 장소 검색(https://developers.kakao.com/docs/restapi/local#키워드-검색)을 활용합니다.
 
 3. 검색된 장소의 상세 조회
-　　 - 각 검색 결과의 상세 정보(지번, 도로명주소, 전화번호 등)를 확인할 수 있어야 합니다.
-　　 - 상세 정보에는 Daum 지도 바로가기 URL이 제공되어야 합니다.
-　　　　˙ Daum 지도 Web API의 바로가기(http://apis.map.daum.net/web/guide/#bigmapurl)를 참고해 주세요.
+    - 각 검색 결과의 상세 정보(지번, 도로명주소, 전화번호 등)를 확인할 수 있어야 합니다.
+    - 상세 정보에는 Daum 지도 바로가기 URL이 제공되어야 합니다.
+    - Daum 지도 Web API의 바로가기(http://apis.map.daum.net/web/guide/#bigmapurl)를 참고해 주세요.
 
 4. 내 검색 히스토리
     - 나의 검색 히스토리(키워드, 검색 일시)를 최신 순으로 보여 주세요.
@@ -29,15 +29,13 @@
 ### 우대사항
 
 1. Front-end 추가 요건
-　　 - SPA(Single Page Application)으로 구현해 주세요.
-　　 - 상세 정보에는 지도가 제공되어야 합니다.
-
-　　　　˙ 지도 표기는 Daum 지도 Web API(http://apis.map.daum.net/web/)를 이용합니다.
-
-　　　　˙ 검색된 장소를 나타내는 커스텀 오버레이를 띄우고, 장소 이름과 주소를 표기해 주세요.
+    - SPA(Single Page Application)으로 구현해 주세요.
+    - 상세 정보에는 지도가 제공되어야 합니다.
+        - 지도 표기는 Daum 지도 Web API(http://apis.map.daum.net/web/)를 이용합니다.
+        - 검색된 장소를 나타내는 커스텀 오버레이를 띄우고, 장소 이름과 주소를 표기해 주세요.
 
 2. Back-end 추가 요건
-　　 - JPA를 사용하여 구현해 주세요.
+    - JPA를 사용하여 구현해 주세요.
 
 
 ### 제약사항
