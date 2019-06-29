@@ -1,28 +1,18 @@
 package place.common;
 
-import org.apache.catalina.core.ApplicationContext;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import place.dto.kakao.format.KakaoResponse;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
-import javax.servlet.http.HttpSession;
 import java.io.DataInputStream;
 import java.io.InputStream;
-import java.lang.ref.WeakReference;
 
 public class CommonUtil {
 
-
-
     public static class Encrypt {
+
         private static String key = null;
         private static String _cipherAlgorithm = "TripleDES";
-
-        public static void main(String[] args) {
-            String de =CommonUtil.Encrypt.encrypt("heeye");
-            System.out.println(de);
-            System.out.println(CommonUtil.Encrypt.decrypt(de));
-        }
 
         static {
             InputStream inStream = null;
@@ -67,7 +57,6 @@ public class CommonUtil {
                 return encrypted;
             }
         }
-
     }
 
 }

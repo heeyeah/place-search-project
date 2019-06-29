@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import place.exception.NoContentException;
 
 @RestController
 public class LoginController {
@@ -19,14 +20,13 @@ public class LoginController {
 	LoginService loginService;
 
 	@GetMapping("/login")
-	public ResponseEntity<Boolean> login(@RequestParam("userId") String userId, @RequestParam("userPassword") String userPassword) {
+	public ResponseEntity<Boolean> login(@RequestParam("userId") String userId, @RequestParam("userPassword") String userPassword) throws Exception {
 
 		boolean isValid = loginService.validateLogin(userId, userPassword);
-		logger.info("========== {} / {}", userId, userPassword);
-		logger.info(" ==========init ! {}", isValid);
 
 		// TODO session 저장
 
 		return new ResponseEntity<>(isValid, HttpStatus.OK);
 	}
+
 }

@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import place.common.CommonUtil;
 import place.dto.UserInfo;
+import place.exception.NoContentException;
 import place.repository.DataRepository;
 
-import javax.servlet.http.HttpSession;
 import java.util.Optional;
 
 @Service
@@ -20,23 +20,17 @@ public class LoginService {
     DataRepository dataRepository;
 
 
-    public boolean validateLogin(String userId, String userPassword) {
+    public boolean validateLogin(String userId, String userPassword) throws Exception {
 
         Optional<UserInfo> user = dataRepository.findById(userId);
 
         logger.info(" valie Login");
 
         if (user.isPresent()) {
-
             logger.info("====== {}", user.get().toString());
-
-            if (user.get().getPassword().equals(CommonUtil.Encrypt.encrypt(userPassword))) {
-                return true;
-            } else {
-                return false;
-            }
+            return user.get().getPassword().equals(CommonUtil.Encrypt.encrypt(userPassword));
         } else {
-            return false;
+            throw new NoContentException("User Id no content");
         }
     }
 }
