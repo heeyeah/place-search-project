@@ -20,23 +20,6 @@ public class ErrorDetails {
         this.error = httpStatus.getReasonPhrase();
     }
 
-
-    public LocalDateTime getTimestamp() {
-        return timestamp;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public String getError() {
-        return error;
-    }
-
     @Override
     public String toString() {
         return "ErrorDetails{" +

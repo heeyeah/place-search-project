@@ -1,5 +1,6 @@
 package place.dto.kakao.format;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Document {
@@ -29,6 +30,10 @@ public class Document {
     @JsonProperty("place_url")
     private String placeUrl;
     private String distance;
+
+    @JsonProperty("redirect_url")
+    @JsonIgnoreProperties(ignoreUnknown=true)
+    private String redirectUrl;
 
     public String getId() {
         return id;
@@ -78,6 +83,14 @@ public class Document {
         return distance;
     }
 
+    public String getRedirectUrl() {
+        return redirectUrl;
+    }
+
+    public void setRedirectUrl(String redirectUrl) {
+        this.redirectUrl = redirectUrl;
+    }
+
     @Override
     public String toString() {
         return "Document{" +
@@ -93,6 +106,7 @@ public class Document {
                 ", y='" + y + '\'' +
                 ", placeUrl='" + placeUrl + '\'' +
                 ", distance='" + distance + '\'' +
+                ", redirectUrl='" + redirectUrl + '\'' +
                 '}';
     }
 }

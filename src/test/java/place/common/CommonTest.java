@@ -37,7 +37,7 @@ public class CommonTest {
 
         ObjectMapper mapper = new ObjectMapper();
         KakaoResponse res =mapper.readValue(jsonString, KakaoResponse.class);
-
+        res.getDocuments().get(0).setRedirectUrl("https://map.kakao.com/link/map/18577297");
 
         System.out.println(res.toString());
         System.out.println(res.getDocuments().get(0).getPlaceName());

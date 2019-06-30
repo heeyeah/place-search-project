@@ -1,4 +1,4 @@
-package place.search;
+package place.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import place.dto.PlaceList;
+import place.entity.SearchHistoryStatistics;
+import place.entity.SearchHistory;
+import place.service.SearchService;
+
+import java.util.List;
 
 @RestController
 public class SearchController {
@@ -27,4 +32,19 @@ public class SearchController {
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
+    @GetMapping("/history")
+    public ResponseEntity<List<SearchHistory>> getSearchHistory(@RequestParam("userId") String userId) throws Exception {
+
+        logger.info(" history ! {}", userId);
+        List<SearchHistory> list = searchService.getSearchHistory(userId);
+
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
+
+    @GetMapping("/statistics")
+    public ResponseEntity<List<SearchHistoryStatistics>> getStatisticsGroupByKeyword() throws Exception {
+
+        List<SearchHistoryStatistics> list = searchService.getStatisticsGroupByKeyword();
+        return new ResponseEntity<>(list, HttpStatus.OK);
+    }
 }

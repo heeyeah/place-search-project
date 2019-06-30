@@ -15,7 +15,7 @@ import org.springframework.context.event.EventListener;
 
 import org.springframework.web.client.RestTemplate;
 import place.common.CommonUtil;
-import place.dto.UserInfo;
+import place.entity.UserInfo;
 import place.repository.DataRepository;
 
 @SpringBootApplication
@@ -33,8 +33,8 @@ public class PlaceSearchProjectApplication {
 	@EventListener(ApplicationReadyEvent.class)
 	public void saveUserInfoAfterStartup() {
 
-		List<UserInfo> list = new ArrayList<UserInfo>();
-		
+		List<UserInfo> list = new ArrayList<>();
+
 		String word;
 		for(int i = 0 ; i < 20 ; i++) {
 			word = String.format("USER%02d", i);
@@ -42,7 +42,6 @@ public class PlaceSearchProjectApplication {
 		}
 		
 		dataRepository.saveAll(list);
-
 	}
 
 	@Bean
