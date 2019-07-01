@@ -33,6 +33,13 @@ public class LoginController {
 	@GetMapping("/login")
 	public ResponseEntity<Boolean> login(@RequestParam("userId") String userId, @RequestParam("userPassword") String userPassword) throws Exception {
 
+		logger.info("id :" +userId);
+		logger.info("pw : "+userPassword);
+
+		if(userId == null || userPassword == null) {
+			throw new IllegalArgumentException();
+		}
+
 		boolean isValid = loginService.validateLogin(userId, userPassword);
 
 		if(isValid) {
