@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1> PLACE SEARCH PAGE </h1>
+    <MainHeader title="Place Search Login Page" msg=""></MainHeader>
 
     <b-form @submit="onLogin" class="form-wrap">
       <b-form-group
@@ -32,10 +32,14 @@
 </template>
 
 <script>
+import MainHeader from './MainHeader.vue'
 import swal from 'sweetalert2'
 
 export default {
   name: 'Login',
+  components: {
+    MainHeader
+  },
   data() {
     return {
       form: {
@@ -123,13 +127,5 @@ h1 {
   margin-right: 250px;
 }
 
-.navbar-custom {
-    background-color: #ffe400;
-}
-
-.navbar-custom .navbar-brand,
-.navbar-custom .navbar-text {
-    color: black;
-}
 
 </style>

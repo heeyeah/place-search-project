@@ -1,6 +1,6 @@
 <template>
   <div>
-    <MainHeader msg="Place Search🗺"></MainHeader>
+    <MainHeader title="Place Search World🔎" :msg="data.now"></MainHeader>
     <MainBody></MainBody>
   </div>
 </template>
@@ -15,6 +15,13 @@ export default {
   components: {
     MainHeader,
     MainBody
+  },
+  computed: {
+    data() {
+      return {
+        now: new Date()
+      }
+    }
   }
 }
 </script>

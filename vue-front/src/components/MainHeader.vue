@@ -1,11 +1,11 @@
 <template>
   <div>
     <nav class="navbar navbar-expand-sm navbar-custom">
-      <a href="/search" class="navbar-brand mb-0 h1">{{ msg }}</a>
+      <a href="/search" class="navbar-brand mb-0 h1">{{ title }}</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCustom">
       </button>
       <div class="navbar-collapse collapse" id="navbarCustom">
-        <span class="ml-auto navbar-text">{{data.now}}</span>
+        <span class="ml-auto navbar-text">{{ msg }}</span>
       </div>
     </nav>
   </div>
@@ -15,6 +15,7 @@
   export default {
     name: 'MainHeader',
     props: {
+      title: String,
       msg: String
     },
     computed: {
