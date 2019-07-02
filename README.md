@@ -3,6 +3,38 @@
 ### 과제 내용
 오픈 API를 이용한 **장소 검색 서비스**
 
+
+### 실행방법
+#### backend
+1. [v1.0-release](https://github.com/heeyeah/place-search-project/releases) 실행가능한 jar파일 다운로드
+2. `cd <<Download경로>>`
+3. `java -jar place-search-project-1.0.0.jar`
+
+#### frontend
+1. `git clone https://github.com/heeyeah/place-search-project.git`
+2. `cd place-search-project/vue-front`
+3. `npm install`
+4. `npm run serve`
+5. [장소검색서비스-http://localhost:8080](http://localhost:8080) 접속
+
+<br/><br/>
+
+
+### 프로젝트 구성환경(Feature)
+> 여기에 오픈소스와 사용목적 명시할 것
+
+#### backend
+
+#### frontend
+
+
+
+
+
+
+
+
+---
 ### 기본 요구사항
 
 1. 로그인
@@ -62,8 +94,3 @@
 - 동시성 이슈가 발생할 수 있는 부분을 염두에 둔 구현
 - 시스템의 확장성(복수의 서버를 통해 서비스를 제공)을 염두에 둔 구현
 - 과제 우대 사항 중 하나 이상을 구현
-
-
-
-
-
