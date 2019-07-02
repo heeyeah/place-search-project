@@ -1,4 +1,4 @@
-package place.entity;
+package place.dto.entity;
 
 public interface SearchHistoryStatistics {
     String getKeyword();

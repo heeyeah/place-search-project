@@ -2,13 +2,22 @@ package place.common;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Test;
+import org.junit.jupiter.api.DisplayName;
+import org.springframework.beans.factory.annotation.Autowired;
+import place.SpringTestSupport;
+import place.dto.entity.UserInfo;
 import place.dto.kakao.format.KakaoResponse;
+import place.repository.UserRepository;
 
 import java.io.IOException;
+import java.util.List;
 
-public class CommonTest {
+@DisplayName("모듈 테스트")
+public class CommonTest extends SpringTestSupport {
+
 
     @Test
+    @DisplayName("JSON 파싱 테스트")
     public void jsonStringParsing() throws IOException {
 
         String jsonString = "{\n" +

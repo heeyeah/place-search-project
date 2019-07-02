@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import place.dto.PlaceList;
-import place.entity.SearchHistoryStatistics;
-import place.entity.SearchHistory;
+import place.dto.entity.SearchHistoryStatistics;
+import place.dto.entity.SearchHistory;
 import place.service.SearchService;
 
 import java.util.List;
@@ -27,7 +27,6 @@ public class SearchController {
     @GetMapping("/search")
     public ResponseEntity<PlaceList> searchPlaceByKeyword(@RequestParam("keyword") String keyword, @RequestParam("page") int page, @RequestParam("size") int size) throws Exception {
 
-        logger.info(" search ! {}", keyword);
         PlaceList list = searchService.searchPlaceByKeyword(keyword, page, size);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
@@ -35,9 +34,7 @@ public class SearchController {
     @GetMapping("/history")
     public ResponseEntity<List<SearchHistory>> getSearchHistory(@RequestParam("userId") String userId) throws Exception {
 
-        logger.info(" history ! {}", userId);
         List<SearchHistory> list = searchService.getSearchHistory(userId);
-
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 

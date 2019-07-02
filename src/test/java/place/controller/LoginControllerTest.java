@@ -2,11 +2,8 @@ package place.controller;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.springframework.web.util.NestedServletException;
 import place.SpringMockMvcTestSupport;
 
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -18,7 +15,7 @@ public class LoginControllerTest extends SpringMockMvcTestSupport {
 
     @Test
     @DisplayName("로그인 성공")
-    void loginTest() throws Exception {
+    public void loginTest() throws Exception {
 
         this.mockMvc.perform(get("/login")
                 .param("userId", "USER00")
@@ -26,8 +23,8 @@ public class LoginControllerTest extends SpringMockMvcTestSupport {
                 .andExpect(status().isOk())
                 .andExpect(content().string(Boolean.toString(true)))
                 .andDo(print());
-
     }
+
 
     @Test
     @DisplayName("로그인 실패")
@@ -45,18 +42,11 @@ public class LoginControllerTest extends SpringMockMvcTestSupport {
     @DisplayName("사용자정보 없음")
     void userDoesNotExist() throws Exception {
 
-        NestedServletException ex = assertThrows(NestedServletException.class, () -> {
             this.mockMvc.perform(get("/login")
                     .param("userId", "CAT")
                     .param("userPassword", "CAT"))
-                    .andReturn();
-        });
+                    .andExpect(status().isNoContent())
+                    .andDo(print());
 
-        assertTrue(ex.getMessage().contains("User Id no content"));
-//        this.mockMvc.perform(get("/login")
-//                .param("userId", "CAT")
-//                .param("userPassword", "CAT"))
-//                .andExpect(status().isNoContent())
-//                .andDo(print());
     }
 }

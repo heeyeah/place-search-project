@@ -74,7 +74,7 @@ export default {
         if(response.status === 200) {
           if(response.data) {
             //route!
-            that.$router.push("/search");
+            that.$router.push('/search');
           } else {
             swal.fire({
               type: 'error',

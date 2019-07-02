@@ -1,4 +1,4 @@
-package place.entity;
+package place.dto.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

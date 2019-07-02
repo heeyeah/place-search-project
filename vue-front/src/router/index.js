@@ -9,7 +9,7 @@ const router = new Router({
   mode: 'history',
   routes: [
     { path: '/login', component: Login },
-    { path: '/search', component: Search },
+    { path: '/search', component: Search},
     { path: '/', redirect: '/login'}
   ]
 })

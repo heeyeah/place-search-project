@@ -23,18 +23,12 @@ public class LoginController {
 
 	private final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
-	private static final String SESSION_ID = "SESSION_ID";
-
 	@Autowired
 	LoginService loginService;
 
 
-
 	@GetMapping("/login")
 	public ResponseEntity<Boolean> login(@RequestParam("userId") String userId, @RequestParam("userPassword") String userPassword) throws Exception {
-
-		logger.info("id :" +userId);
-		logger.info("pw : "+userPassword);
 
 		if(userId == null || userPassword == null) {
 			throw new IllegalArgumentException();
@@ -42,22 +36,15 @@ public class LoginController {
 
 		boolean isValid = loginService.validateLogin(userId, userPassword);
 
-		if(isValid) {
-			HttpSession session = SessionUtil.getHttpSession();
-			session.setAttribute(Constants.SESSION_USER_ID, userId);
-		}
+		if(isValid)
+			SessionUtil.setSessionUserId(userId);
 
 		return new ResponseEntity<>(isValid, HttpStatus.OK);
 	}
 
 
-
-	@GetMapping("/getsession")
+	@GetMapping("/getSession")
 	public String getSession() {
-
-		ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-		HttpSession session = attr.getRequest().getSession();
-
-		return (String)session.getAttribute(Constants.SESSION_USER_ID);
+		return SessionUtil.getSessionUserId();
 	}
 }

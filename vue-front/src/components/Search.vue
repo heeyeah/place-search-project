@@ -1,5 +1,6 @@
 <template>
   <div>
+
     <MainHeader title="Place Search World🔎" :msg="data.now"></MainHeader>
     <MainBody></MainBody>
   </div>
@@ -15,6 +16,9 @@ export default {
   components: {
     MainHeader,
     MainBody
+  },
+  props: {
+      userId : String
   },
   computed: {
     data() {

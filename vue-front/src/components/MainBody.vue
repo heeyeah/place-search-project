@@ -1,9 +1,9 @@
 rows<template>
-  <div class="main-wrap">
-    <b-container >
+  <div>
+    <b-container>
       <b-row>
-        <b-col cols="9">
-          <div>
+        <b-col cols="8">
+          <div class="mg-top">
             <b-form @submit="onSubmit">
               <b-input-group class="search-wrap">
               <b-form-input
@@ -44,16 +44,14 @@ rows<template>
               >
             </b-pagination>
           </div>
-
         </b-col>
-        <b-col cols="3">
+        <b-col cols="4">
           <div>
-            <h2>TOP10</h2>
+            <SearchTop10></SearchTop10>
           </div>
           <div>
-            <h2>히스토리</h2>
+            <SearchHistory></SearchHistory>
           </div>
-
         </b-col>
       </b-row>
     </b-container>
@@ -63,6 +61,9 @@ rows<template>
 </template>
 
 <script>
+  import SearchHistory from './SearchHistory.vue'
+  import SearchTop10 from './SearchTop10.vue'
+
   import swal from 'sweetalert2'
 
   const pageCountSelect = [
@@ -73,10 +74,13 @@ rows<template>
 
   export default {
     name: 'MainBody',
-
+    components: {
+      SearchHistory, SearchTop10
+    },
     data() {
       return {
         form: {
+          userId: '',
           keyword: ''
         },
         apiUrl: 'http://localhost:9000',
@@ -118,8 +122,7 @@ rows<template>
       },
 
       searchPlaceByKeyword: function(init) {
-        var that= this,
-            keyword = this.form.keyword;
+        var that= this;
 
         if(init) return;
 
@@ -159,7 +162,7 @@ rows<template>
 
 <style scoped>
 
-.main-wrap {
+.mg-top {
   margin-top: 50px;
 }
 
@@ -170,7 +173,5 @@ rows<template>
 div .page-count-box {
   width: 80px !important;
 }
-
-
 
 </style>

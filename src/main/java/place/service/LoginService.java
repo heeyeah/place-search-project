@@ -5,9 +5,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import place.common.CommonUtil;
-import place.entity.UserInfo;
-import place.exception.NoContentException;
-import place.repository.DataRepository;
+import place.dto.entity.UserInfo;
+import place.exception.NoUserContentException;
+import place.repository.UserRepository;
 
 import java.util.Optional;
 
@@ -17,20 +17,17 @@ public class LoginService {
     private final Logger logger = LoggerFactory.getLogger(LoginService.class);
 
     @Autowired
-    DataRepository dataRepository;
+    UserRepository userRepository;
 
 
-    public boolean validateLogin(String userId, String userPassword) throws Exception {
+    public boolean validateLogin(String userId, String userPassword) throws NoUserContentException {
 
-        Optional<UserInfo> user = dataRepository.findById(userId);
-
-        logger.info(" valie Login");
+        Optional<UserInfo> user = userRepository.findById(userId);
 
         if (user.isPresent()) {
-            logger.info("====== {}", user.get().toString());
             return user.get().getPassword().equals(CommonUtil.Encrypt.encrypt(userPassword));
         } else {
-            throw new NoContentException("User Id no content");
+            throw new NoUserContentException("User Id no content");
         }
     }
 }

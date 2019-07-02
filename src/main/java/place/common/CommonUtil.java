@@ -1,5 +1,6 @@
 package place.common;
 
+import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
 import javax.crypto.Cipher;
@@ -44,19 +45,20 @@ public class CommonUtil {
             }
         }
 
-//        public static String decrypt(String encrypted) {
-//            try {
-//                SecretKeySpec ks = new SecretKeySpec(key.getBytes(), _cipherAlgorithm);
-//                Cipher cipher = Cipher.getInstance(_cipherAlgorithm);
-//                cipher.init(Cipher.DECRYPT_MODE, ks);
-//                byte[] decryptedBytes = cipher.doFinal(new BASE64Decoder().decodeBuffer(encrypted));
-//                String decrypted = new String(decryptedBytes);
-//                return decrypted;
-//            } catch (Exception e) {
-//                System.out.println(e.getMessage());
-//                return encrypted;
-//            }
-//        }
+
+        public static String decrypt(String encrypted) {
+            try {
+                SecretKeySpec ks = new SecretKeySpec(key.getBytes(), _cipherAlgorithm);
+                Cipher cipher = Cipher.getInstance(_cipherAlgorithm);
+                cipher.init(Cipher.DECRYPT_MODE, ks);
+                byte[] decryptedBytes = cipher.doFinal(new BASE64Decoder().decodeBuffer(encrypted));
+                String decrypted = new String(decryptedBytes);
+                return decrypted;
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                return encrypted;
+            }
+        }
     }
 
 }
