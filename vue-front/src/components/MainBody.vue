@@ -20,7 +20,7 @@ rows<template>
           <!-- table -->
           <div>
             <div class="page-count-box">
-              <b-form-select v-model="bFormSelected" @change="changePageCount" :options="countOption" size="10" />
+              <b-form-select v-model="bFormSelected" @change="changePageCount" :options="countOption" size="5" />
             </div>
             <div>
               <b-table
@@ -44,6 +44,15 @@ rows<template>
               >
             </b-pagination>
           </div>
+          <div class="detail-wrap">
+            <div><span class="bold">장소상세</span></div>
+            <ul>
+              <li v-for="(value, key) in placeDetail" >
+                {{key}}: {{value}}
+              </li>
+            </ul>
+            <div id="map" style="width:500px;height:400px;"></div>
+          </div>
         </b-col>
         <b-col cols="4">
           <div>
@@ -57,9 +66,9 @@ rows<template>
     </b-container>
 
 
+
   </div>
 </template>
-
 <script>
   import SearchHistory from './SearchHistory.vue'
   import SearchTop10 from './SearchTop10.vue'
@@ -92,11 +101,12 @@ rows<template>
         ],
 
         documents: [],
-        bFormSelected: 10,
+        placeDetail: null,
+        bFormSelected: 5,
         rows: 1,
         currentPage: 1,
         totalPage: 1,
-        perPage: 10,
+        perPage: 5,
         countOption: pageCountSelect
       }
     },
@@ -108,6 +118,7 @@ rows<template>
     computed: {
       axiosParams() {
         const params = new URLSearchParams();
+          params.append('userId', this.$session.get('userId'));
           params.append('keyword', this.form.keyword);
           params.append('page', this.currentPage);
           params.append('size', this.perPage);
@@ -145,7 +156,16 @@ rows<template>
       },
 
       rowSelected: function(item) {
+        var data = item[0], detail = {};
 
+        console.log(data);
+        detail['지명'] = data.place_name;
+        detail['카테고리'] = data.category_name;
+        detail['도로명'] = data.road_address_name + ' (' + data.address_name + ')' ;
+        detail['전화번호'] = data.phone;
+        detail['지도 바로가기'] = data.redirect_url;
+
+        this.placeDetail = detail;
       },
 
       changecurrentPage: function (page) {
@@ -170,8 +190,18 @@ rows<template>
   margin-bottom: 30px;
 }
 
+.detail-wrap {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  text-align: left;
+}
+
 div .page-count-box {
   width: 80px !important;
+}
+
+span.bold {
+  font-weight:bold;
 }
 
 </style>

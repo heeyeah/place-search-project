@@ -30,8 +30,7 @@
         this.$axios.get(this.apiUrl + '/statistics')
           .then(function (response) {
             var top10 = response.data;
-            console.log(top10);
-
+          
             that.tpl10 = top10;
 
 

@@ -14,7 +14,6 @@
     name: 'SearchHistory',
     data() {
       return {
-        userId: 'USER00',
         apiUrl: 'http://localhost:9000',
         tplHistory: []
       }
@@ -27,7 +26,7 @@
     computed: {
       axiosParams() {
         const params = new URLSearchParams();
-          params.append('userId', this.userId);
+          params.append('userId', this.$session.get('userId'));
           return params;
       }
     },

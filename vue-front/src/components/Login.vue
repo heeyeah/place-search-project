@@ -70,10 +70,11 @@ export default {
 
       this.$axios.get(this.apiUrl, {params: this.axiosParams})
       .then(function (response) {
-
         if(response.status === 200) {
           if(response.data) {
             //route!
+            that.$session.start();
+            that.$session.set('userId', that.form.userId);
             that.$router.push('/search');
           } else {
             swal.fire({
