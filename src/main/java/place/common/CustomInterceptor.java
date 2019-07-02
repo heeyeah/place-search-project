@@ -1,11 +1,10 @@
-package place;
+package place.common;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StringUtils;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
-import place.common.Constants;
 import place.exception.SessionInvalidException;
 
 import javax.servlet.http.HttpServletRequest;

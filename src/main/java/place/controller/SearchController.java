@@ -25,9 +25,9 @@ public class SearchController {
     SearchService searchService;
 
     @GetMapping("/search")
-    public ResponseEntity<PlaceList> searchPlaceByKeyword(@RequestParam("keyword") String keyword, @RequestParam("page") int page, @RequestParam("size") int size) throws Exception {
+    public ResponseEntity<PlaceList> searchPlaceByKeyword(@RequestParam("keyword") String keyword, @RequestParam("page") int page, @RequestParam("size") int size, @RequestParam("userId") String userId) throws Exception {
 
-        PlaceList list = searchService.searchPlaceByKeyword(keyword, page, size);
+        PlaceList list = searchService.searchPlaceByKeyword(keyword, page, size, userId);
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 

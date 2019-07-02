@@ -46,8 +46,8 @@ public class SearchService {
         return searchRepository.getStatisticsGroupByKeyword();
     }
 
-    private void saveSearchHistory(String keyword) {
-        searchRepository.save(new SearchHistory(SessionUtil.getSessionUserId(), keyword, LocalDateTime.now()));
+    private void saveSearchHistory(String keyword, String userId) {
+        searchRepository.save(new SearchHistory(userId, keyword, LocalDateTime.now()));
     }
 
     public List<SearchHistory> getSearchHistory(String userId) {
@@ -56,7 +56,7 @@ public class SearchService {
         return list;
     }
 
-    public PlaceList searchPlaceByKeyword(String keyword, int page, int size) throws IOException {
+    public PlaceList searchPlaceByKeyword(String keyword, int page, int size, String userId) throws IOException {
 
         // header setting
         HttpHeaders headers = new HttpHeaders();
@@ -97,7 +97,7 @@ public class SearchService {
         PlaceList placeList = new PlaceList(page, totalPage, size, pageableCount, kakaoResponse.getDocuments());
 
         // save search history
-        this.saveSearchHistory(keyword);
+        this.saveSearchHistory(keyword, userId);
 
         return placeList;
     }

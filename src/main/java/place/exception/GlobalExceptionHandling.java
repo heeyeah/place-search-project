@@ -48,6 +48,8 @@ public class GlobalExceptionHandling extends ResponseEntityExceptionHandler {
     private ResponseEntity<?> errorResponse(Exception ex, WebRequest request, HttpStatus httpStatus) {
         HttpHeaders headers = new HttpHeaders();
         ErrorDetailBody body = new ErrorDetailBody(LocalDateTime.now(), ex.getMessage(), httpStatus);
+        logger.error("{}", ex);
+
         return handleExceptionInternal(ex, body, headers, httpStatus, request);
     }
 
