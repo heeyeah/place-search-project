@@ -1,7 +1,10 @@
 <template>
   <div class="mg-top">
-    <b-button v-on:click="getStatisticsGroupByKeyword"
-      variant="warning" size="sm" >TOP10</b-button>
+    <h5 class="title">✨인기 키워드
+<!-- <b-spinner class="spinner-wrap" label="Spinning" variant="warning"></b-spinner> -->
+    </h5>
+    <!-- <b-button v-on:click="getStatisticsGroupByKeyword"
+      variant="warning" size="sm" >TOP10</b-button> -->
     <div v-for="(el, idx) in tpl10" class="top-wrap">
       <span class="bold">{{idx + 1}}위</span>
       {{ el.keyword }} <span class="font-sm">({{ el.count }})</span>
@@ -15,8 +18,19 @@
     data() {
       return {
         apiUrl: 'http://localhost:9000',
-        tpl10: []
+        tpl10: [],
+        polling: null
       }
+    },
+
+    created() {
+      this.polling = setInterval(() => {
+        this.getStatisticsGroupByKeyword();
+      }, 5000) //5초
+    },
+
+    beforeDestroy() {
+      clearInterval(this.polling)
     },
 
     mounted() {
@@ -30,7 +44,7 @@
         this.$axios.get(this.apiUrl + '/statistics')
           .then(function (response) {
             var top10 = response.data;
-          
+
             that.tpl10 = top10;
 
 
@@ -63,4 +77,14 @@ span.bold {
 span.font-sm {
   font-size: small;
 }
+
+h5.title {
+  text-align: left;
+  font-weight: bold;
+}
+
+/* .spinner-wrap {
+  width: 1.7rem;
+  height: 1.7rem;
+} */
 </style>

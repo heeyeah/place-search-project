@@ -1,7 +1,7 @@
 <template>
   <div class="mg-top">
-    <b-button v-on:click="getSearchHistory"
-      variant="warning" size="sm" >HISTORY</b-button>
+    <!-- <b-button v-on:click="getSearchHistory" variant="warning" size="sm" >HISTORY</b-button> -->
+    <h5 class="title">✏️검색 히스토리 <span class="detail">(최근 15)</span></h5>
     <div v-for="(el, idx) in tplHistory" v-if="idx <= 15" class="history-wrap">
       {{ el.keyword }}
       <span class="font-sm"> ({{ el.searchDttm }}) </span>
@@ -15,12 +15,23 @@
     data() {
       return {
         apiUrl: 'http://localhost:9000',
-        tplHistory: []
+        tplHistory: [],
+        polling: null
       }
     },
 
     mounted() {
       this.getSearchHistory();
+    },
+
+    created() {
+      this.polling = setInterval(() => {
+        this.getSearchHistory();
+      }, 5000) //5초
+    },
+
+    beforeDestroy() {
+      clearInterval(this.polling)
     },
 
     computed: {
@@ -62,5 +73,15 @@
 
 span.font-sm {
   font-size: small;
+}
+
+h5.title {
+  text-align: left;
+  font-weight: bold;
+}
+
+h5 > span.detail {
+  font-size: 0.8rem;
+  font-weight: normal;
 }
 </style>
