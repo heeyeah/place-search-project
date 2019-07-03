@@ -1,11 +1,11 @@
 # place-search-project
 
-### 과제 내용
-오픈 API를 이용한 **장소 검색 서비스**
+## 과제 내용
+오픈 API를 이용한 **장소 검색 서비스** 웹페이지 구현
 
 
-### 실행방법
-#### backend
+## 실행방법
+#### server
 1. [v1.0-release](https://github.com/heeyeah/place-search-project/releases) 실행가능한 jar파일 다운로드
 2. `cd <<Download경로>>`
 3. `java -jar place-search-project-1.0.0.jar`
@@ -17,19 +17,36 @@
 4. `npm run serve`
 5. [장소검색서비스-http://localhost:8080](http://localhost:8080) 접속
 
-<br/><br/>
+<br/>
 
+## 프로젝트 구성환경(Feature)
 
-### 프로젝트 구성환경(Feature)
-> 여기에 오픈소스와 사용목적 명시할 것
-
-#### backend
+#### server
+* Spring Boot
+  * RESTful API
+  * Build with Gradle
+* Java8
+* H2 in-memory DB
+* Swagger *(API 문서 자동화를 위해 사용)*
+* Junit
 
 #### frontend
+* Vue.js
+  * node & npm
+  * vue-cli 3.0
 
+<br/>
 
-
-
+## 구현과정
+* 동일 출처 정책(SOP, Same Origin Policy) 제약 사항 CORS 처리
+* API 명세를 자동으로 보기 위해 Swagger 사용
+* AOP 개념을 사용해 Exception Handling 구현
+* 사용자 데이터 저장 및 비밀번호 암호화
+  * 어플리케이션이 구동되는 시점에 USER00 ... USER19, 총 20명의 사용자 데이터를 in-memory DB에 저장
+  * 비밀번호는 사용자ID(ex. USER00)를 암호화한 값 저장
+* 테스트 케이스
+  * 암호화된 비밀번호 값 저장 확인 테스트케이스 작성
+  * Controller 레벨의 테스트케이스 작성
 
 
 
@@ -78,19 +95,3 @@
 - DB는 메모리 DB 사용
 - 클라이언트 구현에 Javascript 사용
 - 외부 라이브러리 및 오픈소스 사용 가능 (단, README 파일에 사용한 오픈 소스와 사용 목적을 명시해 주세요)
-
-
-### 코드레벨 평가항목
-
-- 테스트케이스
-- 에러 처리(Exception Handling)
-- Spring Boot 기능 활용
-- 불필요한(사용되지 않는) 코드의 존재 여부
-
-
-
-### 평가 시 우대사항
-- 트래픽이 많고, 저장되어 있는 데이터가 많음을 염두에 둔 구현
-- 동시성 이슈가 발생할 수 있는 부분을 염두에 둔 구현
-- 시스템의 확장성(복수의 서버를 통해 서비스를 제공)을 염두에 둔 구현
-- 과제 우대 사항 중 하나 이상을 구현
