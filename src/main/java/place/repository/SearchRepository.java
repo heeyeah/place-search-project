@@ -11,6 +11,6 @@ public interface SearchRepository extends JpaRepository<SearchHistory, String> {
 
     List<SearchHistory> findByUserId(String userId);
 
-    @Query(value = "select keyword as keyword, count(keyword) as count from SEARCH_HISTORY GROUP BY KEYWORD ORDER BY COUNT DESC limit 10", nativeQuery = true)
+    @Query(value = "select keyword as keyword, count(keyword) as count from SEARCH_HISTORY GROUP BY KEYWORD ORDER BY COUNT DESC, keyword limit 10", nativeQuery = true)
     List<SearchHistoryStatistics> getStatisticsGroupByKeyword();
 }

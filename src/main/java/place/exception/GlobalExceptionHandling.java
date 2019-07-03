@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
-import org.springframework.web.client.RestClientException;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -48,7 +47,7 @@ public class GlobalExceptionHandling extends ResponseEntityExceptionHandler {
     private ResponseEntity<?> errorResponse(Exception ex, WebRequest request, HttpStatus httpStatus) {
         HttpHeaders headers = new HttpHeaders();
         ErrorDetailBody body = new ErrorDetailBody(LocalDateTime.now(), ex.getMessage(), httpStatus);
-        logger.error("{}", ex);
+        logger.error("error ...", ex);
 
         return handleExceptionInternal(ex, body, headers, httpStatus, request);
     }
