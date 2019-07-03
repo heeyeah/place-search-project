@@ -1,6 +1,6 @@
 <template>
   <div>
-    <CommonHeader title="Place Search World🔎" :msg="data.now"></CommonHeader>
+    <CommonHeader title="Place Search World🔎" :msg="data.info"></CommonHeader>
 
     <b-container>
       <b-row>
@@ -37,7 +37,7 @@ export default {
   computed: {
     data() {
       return {
-        now: '접속일시 : ' + new Date()
+        info: '🗓' + new Date().toLocaleString() + '　　👨🏻‍💻👩🏻‍💻' + this.$session.get('userId')
       }
     }
   }

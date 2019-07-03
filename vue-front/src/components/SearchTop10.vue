@@ -1,10 +1,6 @@
 <template>
   <div class="mg-top">
-    <h5 class="title">✨인기 키워드
-<!-- <b-spinner class="spinner-wrap" label="Spinning" variant="warning"></b-spinner> -->
-    </h5>
-    <!-- <b-button v-on:click="getStatisticsGroupByKeyword"
-      variant="warning" size="sm" >TOP10</b-button> -->
+    <h5 class="title">✨인기 키워드</h5>
     <div v-for="(el, idx) in tpl10" class="top-wrap">
       <span class="bold">{{idx + 1}}위</span>
       {{ el.keyword }} <span class="font-sm">({{ el.count }})</span>
@@ -13,6 +9,8 @@
 </template>
 
 <script>
+  import swal from 'sweetalert2'
+
   export default {
     name: 'SearchTop10',
     data() {

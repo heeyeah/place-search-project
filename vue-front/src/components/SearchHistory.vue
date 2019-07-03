@@ -1,6 +1,5 @@
 <template>
   <div class="mg-top">
-    <!-- <b-button v-on:click="getSearchHistory" variant="warning" size="sm" >HISTORY</b-button> -->
     <h5 class="title">✏️검색 히스토리 <span class="detail">(최근 15)</span></h5>
     <div v-for="(el, idx) in tplHistory" v-if="idx <= 15" class="history-wrap">
       {{ el.keyword }}
@@ -10,6 +9,9 @@
 </template>
 
 <script>
+  /* eslint-disable */
+  import swal from 'sweetalert2'
+
   export default {
     name: 'SearchHistory',
     data() {

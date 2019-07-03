@@ -1,64 +1,65 @@
 <template>
   <div>
-        <div class="mg-top">
-            <b-form @submit="onSubmit">
-              <b-input-group class="search-wrap">
-              <b-form-input
-              type="text"
-              v-model="form.keyword"
-              placeholder="🏠Enter your keyword."></b-form-input>
-              <b-input-group-append>
-                <b-button type="submit" variant="outline-secondary">SEARCH</b-button>
-              </b-input-group-append>
-            </b-input-group>
-          </b-form>
-          </div>
+  <div class="mg-top">
+      <b-form @submit="onSubmit">
+        <b-input-group
+        class="search-wrap">
+        <b-form-input
+        type="text"
+        v-model="form.keyword"
+        placeholder="🏠Enter your keyword."></b-form-input>
+        <b-input-group-append>
+          <b-button type="submit" variant="outline-secondary">SEARCH</b-button>
+        </b-input-group-append>
+      </b-input-group>
+    </b-form>
+    </div>
 
-          <!-- table -->
-          <div>
-            <div class="page-count-box">
-              <b-form-select v-model="bFormSelected" @change="changePageCount" :options="countOption" size="5" />
-            </div>
-            <div>
-              <b-table
-                selectable
-                select-mode="single"
-                selectedVariant="secondary"
-                :small=true head-variant="dark" hover
-                :items="documents"
-                :fields="fields"
-                :show-empty=true
-                @row-selected="rowSelected"
-                empty-text="There are no records to show."
-                empty-filtered-text="There are no records to show.">
-              </b-table>
-            </div>
-            <b-pagination align="center" size="sm"
-              v-model="currentPage"
-              :total-rows="rows"
-              :per-page="perPage"
-              @change="changecurrentPage"
-              >
-            </b-pagination>
-          </div>
-          <div class="detail-wrap">
-            <div><span class="bold">장소상세</span></div>
-            <ul>
-              <li v-for="(value, key) in placeDetail">
+    <!-- table -->
+    <div>
+      <div class="page-count-box">
+        <b-form-select v-model="bFormSelected" @change="changePageCount" :options="countOption" size="5" />
+      </div>
+      <div>
+        <b-table
+          selectable
+          select-mode="single"
+          selectedVariant="secondary"
+          :small=true head-variant="dark" hover
+          :items="documents"
+          :fields="fields"
+          :show-empty=true
+          @row-selected="rowSelected"
+          empty-text="There are no records to show."
+          empty-filtered-text="There are no records to show.">
+        </b-table>
+      </div>
+      <b-pagination align="center" size="sm"
+        v-model="currentPage"
+        :total-rows="rows"
+        :per-page="perPage"
+        @change="changecurrentPage"
+        >
+      </b-pagination>
+    </div>
+    <div class="detail-wrap">
+      <div><span class="bold">장소상세</span></div>
+      <ul>
+        <li v-for="(value, key) in placeDetail">
 
-               <template v-if="key === '지도 바로가기'">
-                 {{key}}: <b-link :href="value">{{value}}</b-link>
-               </template>
-               <template v-else-if="key === '장소명'">
-                 {{key}}: <b-link :href="placeDetailExc">{{value}}</b-link>
-               </template>
-               <template v-else>
-                 {{key}}: {{value}}
-               </template>
+         <template v-if="key === '지도 바로가기'">
+           {{key}}: <b-link :href="value">{{value}}</b-link>
+         </template>
+         <template v-else-if="key === '장소명'">
+           {{key}}: <b-link :href="placeDetailExc">{{value}}</b-link>
+         </template>
+         <template v-else>
+           {{key}}: {{value}}
+         </template>
 
-              </li>
-            </ul>
-          </div>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 <script>
