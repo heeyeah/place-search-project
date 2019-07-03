@@ -2,10 +2,6 @@
   <div id="app">
     <router-view></router-view>
   </div>
-  <!-- <div id="app"> -->
-
-    <!-- <TodoBody></TodoBody> -->
-  <!-- </div> -->
 </template>
 
 <script>

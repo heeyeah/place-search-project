@@ -1,31 +1,66 @@
 <template>
   <div>
+    <CommonHeader title="Place Search World🔎" :msg="data.now"></CommonHeader>
 
-    <MainHeader title="Place Search World🔎" :msg="data.now"></MainHeader>
-    <MainBody></MainBody>
+    <b-container>
+      <b-row>
+        <b-col cols="8">
+          <SearchBody></SearchBody>
+        </b-col>
+        <b-col cols="4">
+          <div>
+            <SearchTop10></SearchTop10>
+          </div>
+          <div>
+            <SearchHistory></SearchHistory>
+          </div>
+        </b-col>
+      </b-row>
+    </b-container>
   </div>
 </template>
 
 <script>
 
-import MainHeader from './MainHeader.vue'
-import MainBody from './MainBody.vue'
+import CommonHeader from './CommonHeader.vue'
+import SearchHistory from './SearchHistory.vue'
+import SearchTop10 from './SearchTop10.vue'
+import SearchBody from './SearchBody.vue'
 
 export default {
   name: 'Search',
   components: {
-    MainHeader,
-    MainBody
+    CommonHeader,
+    SearchHistory, SearchTop10, SearchBody
   },
-  props: {
-      userId : String
-  },
+
   computed: {
     data() {
       return {
-        now: new Date()
+        now: '접속일시 : ' + new Date()
       }
     }
   }
 }
 </script>
+<style scoped>
+
+  .mg-top {
+    margin-top: 50px;
+  }
+
+  .search-wrap {
+    margin-bottom: 30px;
+  }
+
+  .detail-wrap {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    text-align: left;
+  }
+
+  span.bold {
+    font-weight:bold;
+  }
+
+</style>

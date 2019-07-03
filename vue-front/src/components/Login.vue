@@ -1,6 +1,6 @@
 <template>
   <div>
-    <MainHeader title="Place Search Login Page" msg=""></MainHeader>
+    <CommonHeader title="Place Search Login Page" msg=""></CommonHeader>
 
     <b-form @submit="onLogin" class="form-wrap">
       <b-form-group
@@ -32,13 +32,13 @@
 </template>
 
 <script>
-import MainHeader from './MainHeader.vue'
+import CommonHeader from './CommonHeader.vue'
 import swal from 'sweetalert2'
 
 export default {
   name: 'Login',
   components: {
-    MainHeader
+    CommonHeader
   },
   data() {
     return {

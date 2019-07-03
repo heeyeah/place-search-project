@@ -1,9 +1,6 @@
-rows<template>
+<template>
   <div>
-    <b-container>
-      <b-row>
-        <b-col cols="8">
-          <div class="mg-top">
+        <div class="mg-top">
             <b-form @submit="onSubmit">
               <b-input-group class="search-wrap">
               <b-form-input
@@ -47,32 +44,24 @@ rows<template>
           <div class="detail-wrap">
             <div><span class="bold">장소상세</span></div>
             <ul>
-              <li v-for="(value, key) in placeDetail" >
-                {{key}}: {{value}}
+              <li v-for="(value, key) in placeDetail">
+
+               <template v-if="key === '지도 바로가기'">
+                 {{key}}: <b-link :href="value">{{value}}</b-link>
+               </template>
+               <template v-else-if="key === '장소명'">
+                 {{key}}: <b-link :href="placeDetailExc">{{value}}</b-link>
+               </template>
+               <template v-else>
+                 {{key}}: {{value}}
+               </template>
+
               </li>
             </ul>
-            <div id="map" style="width:500px;height:400px;"></div>
           </div>
-        </b-col>
-        <b-col cols="4">
-          <div>
-            <SearchTop10></SearchTop10>
-          </div>
-          <div>
-            <SearchHistory></SearchHistory>
-          </div>
-        </b-col>
-      </b-row>
-    </b-container>
-
-
-
   </div>
 </template>
 <script>
-  import SearchHistory from './SearchHistory.vue'
-  import SearchTop10 from './SearchTop10.vue'
-
   import swal from 'sweetalert2'
 
   const pageCountSelect = [
@@ -82,10 +71,7 @@ rows<template>
   ]
 
   export default {
-    name: 'MainBody',
-    components: {
-      SearchHistory, SearchTop10
-    },
+    name: 'SearchBody',
     data() {
       return {
         form: {
@@ -102,6 +88,7 @@ rows<template>
 
         documents: [],
         placeDetail: null,
+        placeDetailExc: null,
         bFormSelected: 5,
         rows: 1,
         currentPage: 1,
@@ -132,10 +119,23 @@ rows<template>
         this.searchPlaceByKeyword();
       },
 
+
       searchPlaceByKeyword: function(init) {
         var that= this;
 
-        if(init) return;
+        if(init) {
+          if(!this.$session.get('userId')) {
+            swal.fire({
+              type: 'info',
+              text: 'Session Invalid',
+              showConfirmButton: false,
+              timer: 1000
+            }).then(()=>{
+              that.$router.push('/login');
+            })
+          }
+          return;
+        }
 
         this.$axios.get(this.apiUrl + '/search', {params: this.axiosParams})
           .then(function (response) {
@@ -158,22 +158,14 @@ rows<template>
       rowSelected: function(item) {
         var data = item[0], detail = {};
 
-        console.log(data);
-        detail['지명'] = data.place_name;
+        detail['장소명'] = data.place_name;
         detail['카테고리'] = data.category_name;
         detail['도로명'] = data.road_address_name + ' (' + data.address_name + ')' ;
         detail['전화번호'] = data.phone;
         detail['지도 바로가기'] = data.redirect_url;
 
+        this.placeDetailExc = data.place_url;
         this.placeDetail = detail;
-
-        var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-        var options = { //지도를 생성할 때 필요한 기본 옵션
-        	center: new kakao.maps.LatLng(33.450701, 126.570667), //지도의 중심좌표.
-        	level: 3 //지도의 레벨(확대, 축소 정도)
-        };
-
-        var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
       },
 
       changecurrentPage: function (page) {

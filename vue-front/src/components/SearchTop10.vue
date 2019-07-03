@@ -70,10 +70,6 @@
   text-align: left;
 }
 
-span.bold {
-  font-weight:bold;
-}
-
 span.font-sm {
   font-size: small;
 }
@@ -83,8 +79,4 @@ h5.title {
   font-weight: bold;
 }
 
-/* .spinner-wrap {
-  width: 1.7rem;
-  height: 1.7rem;
-} */
 </style>

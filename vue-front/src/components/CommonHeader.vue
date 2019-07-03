@@ -13,7 +13,7 @@
 
 <script>
   export default {
-    name: 'MainHeader',
+    name: 'CommonHeader',
     props: {
       title: String,
       msg: String
