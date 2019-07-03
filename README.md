@@ -6,9 +6,10 @@
 
 ## 실행방법
 #### server
-1. [v1.0-release](https://github.com/heeyeah/place-search-project/releases) 실행가능한 jar파일 다운로드
+1. [main-release](https://github.com/heeyeah/place-search-project/releases) 실행가능한 jar파일 다운로드
 2. `cd <<Download경로>>`
-3. `java -jar place-search-project-1.0.0.jar`
+3. `java -jar place-search-project-1.1.0.jar`
+4. [Swagger](http://localhost:9000/swagger-ui.html) API 목록 & 테스트
 
 #### frontend
 1. `git clone https://github.com/heeyeah/place-search-project.git`
