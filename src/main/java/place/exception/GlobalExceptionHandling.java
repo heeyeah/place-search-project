@@ -24,11 +24,6 @@ public class GlobalExceptionHandling extends ResponseEntityExceptionHandler {
         return errorResponse(ex, request, HttpStatus.NO_CONTENT);
     }
 
-    @ExceptionHandler(SessionInvalidException.class)
-    public ResponseEntity<?> handleSessionInvalidException(SessionInvalidException ex, WebRequest request) {
-        return errorResponse(ex, request, HttpStatus.UNAUTHORIZED);
-    }
-
     @ExceptionHandler(HttpClientErrorException.class)
     public ResponseEntity<?> handleHttpClientErrorException(HttpClientErrorException ex, WebRequest request) {
         return errorResponse(ex, request, ex.getStatusCode());
@@ -47,7 +42,7 @@ public class GlobalExceptionHandling extends ResponseEntityExceptionHandler {
     private ResponseEntity<?> errorResponse(Exception ex, WebRequest request, HttpStatus httpStatus) {
         HttpHeaders headers = new HttpHeaders();
         ErrorDetailBody body = new ErrorDetailBody(LocalDateTime.now(), ex.getMessage(), httpStatus);
-        logger.error("error ...", ex);
+        logger.error("", ex);
 
         return handleExceptionInternal(ex, body, headers, httpStatus, request);
     }

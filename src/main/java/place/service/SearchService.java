@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpEntity;
@@ -14,7 +15,6 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
 import place.common.Constants;
-import place.common.SessionUtil;
 import place.dto.PlaceList;
 import place.dto.entity.SearchHistoryStatistics;
 import place.dto.entity.SearchHistory;
@@ -35,12 +35,17 @@ public class SearchService {
     private static final String PAGE = "page";
     private static final String SIZE = "size";
     private static final String AUTHORIZATION = "Authorization";
+    private static final String KAKAO_APP_KEY_PREFIX = "KakaoAK ";
 
     @Autowired
     private RestTemplate restTemplate;
 
     @Autowired
     private SearchRepository searchRepository;
+
+
+    @Value("${kakao.app.key}")
+    private String APP_KEY;
 
     public List<SearchHistoryStatistics> getStatisticsGroupByKeyword() {
         return searchRepository.getStatisticsGroupByKeyword();
@@ -58,9 +63,11 @@ public class SearchService {
 
     public PlaceList searchPlaceByKeyword(String keyword, int page, int size, String userId) throws IOException {
 
+        logger.info(" KAKAO APP KEY [{}]", APP_KEY);
+
         // header setting
         HttpHeaders headers = new HttpHeaders();
-        headers.set(AUTHORIZATION, Constants.KAKAO_APP_KEY);
+        headers.set(AUTHORIZATION, KAKAO_APP_KEY_PREFIX + APP_KEY);
 
 
         // uri

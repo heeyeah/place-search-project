@@ -6,3 +6,7 @@ spring:
       enabled: true
   datasource:
     url: jdbc:h2:mem:testdb
+
+kakao:
+  app:
+    key: 'aeee035999ede55c00cdeeeec45e1afb'
